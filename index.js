@@ -97,17 +97,47 @@ async function run() {
       });
     });
 
-    //  get a single product route
+    // //  get a single product route
+    // app.get("/products/:id", async (req, res) => {
+    //   const { id } = req.params;
+    //   const result = await productCollection.findOne({
+    //     _id: new ObjectId(id),
+    //   });
+    //   res.send({
+    //     data: result,
+    //     status: 200,
+    //     message: "Product retrieve successfuly",
+    //   });
+    // });
+
+    // get a single product by ID with error handling
     app.get("/products/:id", async (req, res) => {
       const { id } = req.params;
-      const result = await productCollection.findOne({
-        _id: new ObjectId(id),
-      });
-      res.send({
-        data: result,
-        status: 200,
-        message: "Product retrieve successfuly",
-      });
+
+      try {
+        const objectId = new ObjectId(id); // check if valid
+        const result = await productCollection.findOne({ _id: objectId });
+
+        if (!result) {
+          return res.status(404).send({
+            data: null,
+            status: 404,
+            message: "Product not found",
+          });
+        }
+
+        res.send({
+          data: result,
+          status: 200,
+          message: "Product retrieved successfully",
+        });
+      } catch (error) {
+        res.status(400).send({
+          status: 400,
+          message: "Invalid product ID",
+          error: error.message,
+        });
+      }
     });
 
     // Delete single product route
@@ -209,3 +239,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+// use command  npm start to run the server

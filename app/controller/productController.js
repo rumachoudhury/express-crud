@@ -36,6 +36,34 @@ const getAllProduct = async (req, res) => {
   });
 };
 
+// Get a single product by ID with error handling
+
+const getProductById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).send({
+        data: null,
+        status: 404,
+        message: "Product not found",
+      });
+    }
+
+    res.status(200).json({
+      data: product,
+      status: 200,
+      message: "Product retrieved successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal server error",
+    });
+  }
+};
+
 // Update a product
 const updateProduct = async (req, res) => {
   const { id } = req.params;
@@ -97,6 +125,7 @@ const orderProduct = async (req, res) => {
 module.exports = {
   createProduct,
   getAllProduct,
+  getProductById,
   updateProduct,
   deleteProduct,
   orderProduct,
