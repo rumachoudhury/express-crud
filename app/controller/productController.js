@@ -37,7 +37,6 @@ const getAllProduct = async (req, res) => {
 };
 
 // Get a single product by ID with error handling
-
 const getProductById = async (req, res) => {
   const { id } = req.params;
 
