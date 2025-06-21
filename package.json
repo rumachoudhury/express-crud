@@ -1,11 +1,12 @@
 {
   "name": "express-crud",
   "version": "1.0.0",
-  "description": "npm init",
-  "main": "yes",
+  "description": "Simple CRUD app with Express and MongoDB",
+  "main": "app/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app/server.js"
+    "start": "node app/server.js",
+    "dev": "nodemon app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
