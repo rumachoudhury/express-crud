@@ -4,8 +4,8 @@
   "description": "Simple CRUD app with Express and MongoDB",
   "main": "app/server.js",
   "scripts": {
-    "start": "node app/server.js",
-    "dev": "nodemon app/server.js",
+    "start": "node init && node app/server.js",
+    "dev": "node init && nodemon app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
